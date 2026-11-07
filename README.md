@@ -119,3 +119,44 @@ No live store credentials or deployment are needed for unit tests. Local tests a
 ## Integration basis
 
 The implementation was based on the official [Medusa Next.js starter](https://github.com/medusajs/nextjs-starter-medusa/tree/9818886f06e493cb2249733d114d339aa216ef00): product server page, region-aware product fetch, money formatting and inventory UI. That snapshot uses Next 15.3.9, React 19, and Medusa v2. Other Next App Router versions may work, but have not been exercised in a full deployed storefront here. Follow [Next.js JSON-LD guidance](https://nextjs.org/docs/app/guides/json-ld) and [Google's Product guidance](https://developers.google.com/search/docs/appearance/structured-data/product).
+
+## Reusable pagination helpers
+
+Both helpers and their option interfaces are exported from the package root. They
+have no Medusa, Next.js, or React dependency and do not invent merchant routes or
+filter parameters.
+
+```ts
+import { parsePageNumber, buildPaginatedUrl } from 'medusa-nextjs-jsonld'
+
+const config = { baseUrl: 'https://shop.example.com' } // trusted server configuration
+const page = parsePageNumber(searchParams.page, { max: 10000, fallback: 1 })
+const url = buildPaginatedUrl('/catalog?color=blue&sort=new', page, config)
+// Page 2: https://shop.example.com/catalog?color=blue&sort=new&page=2
+// Page 1: https://shop.example.com/catalog?color=blue&sort=new
+const customUrl = buildPaginatedUrl('/catalog?color=blue', page, config, {
+  pageParameter: 'p',
+})
+```
+
+- `parsePageNumber(input: unknown, options?: ParsePageNumberOptions): number`
+  accepts decimal digit strings representing positive safe integers (leading
+  zeros are accepted). Missing values, arrays, numbers, whitespace, signs,
+  fractions, exponent notation, unsafe integers, and values exceeding `max`
+  return `fallback`. Defaults are `max: Number.MAX_SAFE_INTEGER` and
+  `fallback: 1`. Both options must be positive safe integers and fallback must
+  not exceed max; invalid options throw `RangeError`.
+- `buildPaginatedUrl(path: string, page: number, config: Pick<JsonLdConfig, 'baseUrl'>,
+  options?: PaginatedUrlOptions): string` resolves relative paths using standard
+  URL semantics against the configured base URL. The default `pageParameter`
+  is `page`; other query parameters, repeated filter values and fragments are
+  retained. All instances of the selected page parameter are removed on page 1,
+  or replaced by one value otherwise. URLSearchParams may normalize query
+  encoding while preserving its decoded values. Pass actual route/filter
+  parameters from the page, not fabricated facets.
+- The URL helper requires a positive safe integer page, a nonempty query key
+  without whitespace/control characters, and an absolute HTTP(S) base URL
+  without credentials. Cross-origin URLs and credential-bearing URLs are
+  rejected. Configure baseUrl on the server, never from request headers.
+  These helpers do not impose an SEO filter/canonical policy: callers decide
+  which real filters belong in canonical metadata and JSON-LD.
