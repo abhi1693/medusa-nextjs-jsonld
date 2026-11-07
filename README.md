@@ -1,5 +1,8 @@
 # Medusa Next.js JSON-LD
 
+[![CI](https://github.com/abhi1693/medusa-nextjs-jsonld/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/abhi1693/medusa-nextjs-jsonld/actions/workflows/ci.yml)
+[![Sponsor](https://img.shields.io/badge/Sponsor-abhi1693-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/abhi1693)
+
 Server-rendered Schema.org structured data for **Medusa v2** storefronts. ESM TypeScript package with no runtime dependency in the core; optional React 18/19 component for Next.js App Router. Supports Product/Offer, WebSite/Organization, CollectionPage/ItemList, BreadcrumbList and informational WebPage types.
 
 This repository is a source package, not a published npm release. It is not an automatically loaded Medusa backend plugin: storefronts own their HTML, routing, pricing context, and canonical URLs. Install in the **storefront**, add the component to the corresponding server pages, and optionally copy the admin widget into your backend. There is no tracking, external service, API key or database migration.
@@ -160,3 +163,9 @@ const customUrl = buildPaginatedUrl('/catalog?color=blue', page, config, {
   rejected. Configure baseUrl on the server, never from request headers.
   These helpers do not impose an SEO filter/canonical policy: callers decide
   which real filters belong in canonical metadata and JSON-LD.
+
+## Release preparation
+
+The `release.yml` and `publish.yml` callers use the shared `abhi1693/actions@v1` workflows. Preparation runs CI, builds an exact committed version and creates a draft containing its archive, checksums and provenance. Publication verifies and publishes that same archive with npm OIDC. Normal CI does not publish.
+
+**Release preparation is blocked until the owner selects a license and adds its LICENSE file.** This migration preserves the existing `UNLICENSED` declaration. The shared packager requires a LICENSE file; passing the ordinary test matrix does not clear this requirement. Before preparation, also commit matching package/lockfile versions and `docs/releases/VERSION.md` notes. Configure npm ownership and trusted publishing for repository `abhi1693/medusa-nextjs-jsonld`, workflow `publish.yml`, with no environment. No registry token or package release is created by this migration.
