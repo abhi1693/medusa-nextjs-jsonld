@@ -181,12 +181,6 @@ const customUrl = buildPaginatedUrl('/catalog?color=blue', page, config, {
   These helpers do not impose an SEO filter/canonical policy: callers decide
   which real filters belong in canonical metadata and JSON-LD.
 
-## Release preparation
-
-The `release.yml` and `publish.yml` callers use the shared `abhi1693/actions@v1` workflows. Preparation runs CI, builds an exact committed version and creates a draft containing its archive, checksums and provenance. Publication verifies and publishes that same archive with npm OIDC. Normal CI does not publish.
-
-The shared packager verifies the actual archive, including its MIT license, core/React exports and supporting runtime files. Before preparation, commit matching package/lockfile versions. Optional `docs/releases/VERSION.md` files supply custom notes; otherwise GitHub generates the draft notes. Configure npm ownership and trusted publishing for repository `abhi1693/medusa-nextjs-jsonld`, workflow `publish.yml`, with no environment. No registry token or package release is created by this migration.
-
 ## License
 
 [MIT](LICENSE) © 2026 abhi1693.
