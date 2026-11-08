@@ -6,7 +6,8 @@
   "files": [
     "dist",
     "examples",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -46,13 +47,45 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/abhi1693/medusa-nextjs-jsonld.git"
+    "url": "git+https://github.com/abhi1693/medusa-nextjs-jsonld.git"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "typesVersions": {
     "*": {
       "react": [
         "dist/react.d.ts"
+      ]
+    }
+  },
+  "homepage": "https://github.com/abhi1693/medusa-nextjs-jsonld#readme",
+  "bugs": {
+    "url": "https://github.com/abhi1693/medusa-nextjs-jsonld/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/abhi1693"
+  },
+  "keywords": [
+    "medusa",
+    "medusa-v2",
+    "ecommerce",
+    "typescript",
+    "nextjs",
+    "json-ld",
+    "schema-org",
+    "structured-data",
+    "seo",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "config": {
+    "release": {
+      "requiredFiles": [
+        "dist/core.js",
+        "dist/pagination.js",
+        "dist/types.d.ts"
       ]
     }
   }
