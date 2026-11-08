@@ -28,5 +28,5 @@ jobs:
         if: matrix.node == 24
         env:
           TOOLS: ${{ steps.release-tools.outputs.path }}
-          PACKAGE_NAME: medusa-nextjs-jsonld
+          PACKAGE_NAME: '@abhi1693/medusa-nextjs-jsonld'
         run: node "$TOOLS/package.mjs" --check-only

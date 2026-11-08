@@ -26,10 +26,10 @@ Install this library in the **storefront** and add its component to the correspo
 
 ## Install
 
-The first release version is `0.0.1`. Once that version is available on npm, install it in your storefront:
+The scoped package release version is `0.0.2`. Once that version is available on npm, install it in your storefront:
 
 ```sh
-npm install medusa-nextjs-jsonld@0.0.1
+npm install @abhi1693/medusa-nextjs-jsonld@0.0.2
 ```
 
 To install a reviewed source checkout, build and pack it first:
@@ -39,7 +39,7 @@ npm ci
 npm run check
 npm pack
 # In your storefront, install the resulting local tarball:
-npm install /path/to/medusa-nextjs-jsonld-0.0.1.tgz
+npm install /path/to/abhi1693-medusa-nextjs-jsonld-0.0.2.tgz
 ```
 
 Requires Node 20+, React 18/19 for the `/react` export. Core imports do not load React or Next. The package is currently ESM-only. Licensed under [MIT](LICENSE).
@@ -47,8 +47,8 @@ Requires Node 20+, React 18/19 for the `/react` export. Core imports do not load
 ## Product page (minimum integration)
 
 ```tsx
-import { buildProductJsonLd } from "medusa-nextjs-jsonld"
-import { JsonLd } from "medusa-nextjs-jsonld/react"
+import { buildProductJsonLd } from "@abhi1693/medusa-nextjs-jsonld"
+import { JsonLd } from "@abhi1693/medusa-nextjs-jsonld/react"
 
 // Keep config in your storefront's server code. Use your actual public origin.
 const config = {
@@ -89,7 +89,7 @@ Availability comes only from explicit inventory flags/quantity: unmanaged invent
 ```tsx
 import {
   buildHomeJsonLd, buildListingJsonLd, buildBreadcrumbJsonLd, buildPageJsonLd,
-} from "medusa-nextjs-jsonld"
+} from "@abhi1693/medusa-nextjs-jsonld"
 
 // Put on the actual localized homepage, not every layout or checkout page.
 const home = buildHomeJsonLd({
@@ -155,7 +155,7 @@ have no Medusa, Next.js, or React dependency and do not invent merchant routes o
 filter parameters.
 
 ```ts
-import { parsePageNumber, buildPaginatedUrl } from 'medusa-nextjs-jsonld'
+import { parsePageNumber, buildPaginatedUrl } from '@abhi1693/medusa-nextjs-jsonld'
 
 const config = { baseUrl: 'https://shop.example.com' } // trusted server configuration
 const page = parsePageNumber(searchParams.page, { max: 10000, fallback: 1 })
