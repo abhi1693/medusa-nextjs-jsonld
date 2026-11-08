@@ -20,5 +20,5 @@ jobs:
       attestations: write
     with:
       operation: prepare
-      package-name: 'medusa-nextjs-jsonld'
+      package-name: '@abhi1693/medusa-nextjs-jsonld'
       version: ${{ inputs.version }}

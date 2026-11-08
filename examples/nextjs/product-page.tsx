@@ -1,7 +1,7 @@
 // Adapt inside the existing App Router product page; keep your own metadata,
 // static params, region lookup, 404 handling, and visible ProductTemplate.
-import { buildProductJsonLd } from "medusa-nextjs-jsonld"
-import { JsonLd } from "medusa-nextjs-jsonld/react"
+import { buildProductJsonLd } from "@abhi1693/medusa-nextjs-jsonld"
+import { JsonLd } from "@abhi1693/medusa-nextjs-jsonld/react"
 
 // In ProductPage, after loading pricedProduct with the SAME region/customer
 // context used by the visible page and checking it exists:

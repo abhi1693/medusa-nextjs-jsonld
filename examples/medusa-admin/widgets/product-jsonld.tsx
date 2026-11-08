@@ -2,7 +2,7 @@ import { defineWidgetConfig } from "@medusajs/admin-sdk"
 import type { AdminProduct, DetailWidgetProps } from "@medusajs/framework/types"
 import { Container, Heading } from "@medusajs/ui"
 import { useId, useMemo, useState } from "react"
-import { buildProductJsonLd } from "medusa-nextjs-jsonld"
+import { buildProductJsonLd } from "@abhi1693/medusa-nextjs-jsonld"
 
 // Copy into src/admin/widgets in your Medusa application. See ../README.md.
 // This is a local preview, not a metadata editor or storefront injector.

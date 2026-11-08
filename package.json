@@ -1,6 +1,6 @@
 {
-  "name": "medusa-nextjs-jsonld",
-  "version": "0.0.1",
+  "name": "@abhi1693/medusa-nextjs-jsonld",
+  "version": "0.0.2",
   "description": "Safe server-rendered structured data builders for Medusa v2 storefronts",
   "type": "module",
   "files": [
