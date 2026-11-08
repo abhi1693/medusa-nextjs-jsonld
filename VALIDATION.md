@@ -23,6 +23,10 @@ consumer TypeScript settings passed after repacking/reinstalling. Tested framewo
 versions record the integration basis, not advice to pin an older framework release.
 Use supported security-patched framework versions in production.
 
+## Hosted validation
+
+The package CI runs locked installs and the build/test/pack checks on Node 20, 22 and 24. All three jobs passed for migration head `1639cb580c5d67145214f3b92d055696792e1f64`; consult the PR checks for the final commit's result. This is package validation, separate from the historical local smoke application and live-store acceptance.
+
 ## Not verified here
 
 - A live Medusa server and actual regional catalog, taxes, customer-specific pricing,
@@ -30,7 +34,6 @@ Use supported security-patched framework versions in production.
 - Live Admin placement, appearance and navigation in a browser.
 - Deployed production HTML, CSP configuration, crawler access, Rich Results Test,
   Search Console, or Google's decision to display rich results.
-- CI matrix on Node 20/22 until GitHub Actions runs. The local run used Node 24 only.
 - CommonJS (not supported), Medusa v1 (not supported), ProductGroup rich results,
   and arbitrary Next/Medusa version combinations.
 

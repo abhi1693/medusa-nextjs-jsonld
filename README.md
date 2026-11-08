@@ -1,11 +1,28 @@
 # Medusa Next.js JSON-LD
 
 [![CI](https://github.com/abhi1693/medusa-nextjs-jsonld/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/abhi1693/medusa-nextjs-jsonld/actions/workflows/ci.yml)
+[![Node.js >=20](https://img.shields.io/badge/Node.js-%E2%89%A520-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![ES modules](https://img.shields.io/badge/modules-ESM-blue)](https://nodejs.org/api/esm.html)
+[![MIT license](https://img.shields.io/github/license/abhi1693/medusa-nextjs-jsonld)](LICENSE)
 [![Sponsor](https://img.shields.io/badge/Sponsor-abhi1693-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/abhi1693)
 
 Server-rendered Schema.org structured data for **Medusa v2** storefronts. ESM TypeScript package with no runtime dependency in the core; optional React 18/19 component for Next.js App Router. Supports Product/Offer, WebSite/Organization, CollectionPage/ItemList, BreadcrumbList and informational WebPage types.
 
 This repository is a source package, not a published npm release. It is not an automatically loaded Medusa backend plugin: storefronts own their HTML, routing, pricing context, and canonical URLs. Install in the **storefront**, add the component to the corresponding server pages, and optionally copy the admin widget into your backend. There is no tracking, external service, API key or database migration.
+
+[Install](#install-from-source) · [Capabilities](#capabilities) · [Product pages](#product-page-minimum-integration) · [Other pages](#coverage-beyond-products) · [Pagination](#reusable-pagination-helpers) · [Development](#development)
+
+## Capabilities
+
+| Capability | Behavior |
+| --- | --- |
+| Product and offers | Build Product/Offer data from supplied Medusa v2 calculated prices and explicit inventory state, including valid zero prices. |
+| Site identity | Build WebSite and optional Organization data from configured public facts. |
+| Listing pages | Build CollectionPage/ItemList data for the visible page subset in its actual order. |
+| Navigation and information | Build BreadcrumbList and supported informational WebPage types from caller-supplied routes and content. |
+| Server rendering | Render escaped JSON-LD with the optional React component, including a CSP nonce, without client effects or data fetching. |
+| Pagination | Parse bounded page numbers and build same-origin pagination URLs while preserving other query parameters. |
+| Integration | ESM TypeScript exports for the core and optional React component; optional copy-in Admin preview example. |
 
 ## Install from source
 
@@ -17,7 +34,7 @@ npm pack
 npm install /path/to/medusa-nextjs-jsonld-0.1.0.tgz
 ```
 
-Requires Node 20+, React 18/19 for the `/react` export. Core imports do not load React or Next. The package is currently ESM-only. No license to redistribute has been selected by the repository owner (`UNLICENSED`).
+Requires Node 20+, React 18/19 for the `/react` export. Core imports do not load React or Next. The package is currently ESM-only. Licensed under [MIT](LICENSE).
 
 ## Product page (minimum integration)
 
@@ -103,7 +120,7 @@ See [the optional product details widget](examples/medusa-admin/README.md). It u
 
 `JsonLd` is server-component compatible and renders an ordinary `application/ld+json` script, without effects or client-only hydration. It accepts a CSP `nonce` and optional `id`. `stringifyJsonLd` escapes HTML-significant characters and Unicode line separators, preventing product text such as `</script>` from breaking out of the script. Use this serializer rather than raw JSON.stringify with dangerouslySetInnerHTML. Invalid mandatory canonical URLs throw; supply a trusted configured base URL rather than request headers. Malformed optional product image URLs are omitted so bad catalog assets do not break rendering. Invalid canonical, variant, organization, listing and breadcrumb URLs throw; validate configuration before deployment. URL validation does not prove same-origin, public reachability or canonical correctness: callers own those choices, including any fragment or query string. Don't fetch arbitrary storefront URLs from an admin/backend endpoint.
 
-Development verification:
+## Development
 
 ```sh
 npm ci
@@ -168,4 +185,8 @@ const customUrl = buildPaginatedUrl('/catalog?color=blue', page, config, {
 
 The `release.yml` and `publish.yml` callers use the shared `abhi1693/actions@v1` workflows. Preparation runs CI, builds an exact committed version and creates a draft containing its archive, checksums and provenance. Publication verifies and publishes that same archive with npm OIDC. Normal CI does not publish.
 
-**Release preparation is blocked until the owner selects a license and adds its LICENSE file.** This migration preserves the existing `UNLICENSED` declaration. The shared packager requires a LICENSE file; passing the ordinary test matrix does not clear this requirement. Before preparation, also commit matching package/lockfile versions and `docs/releases/VERSION.md` notes. Configure npm ownership and trusted publishing for repository `abhi1693/medusa-nextjs-jsonld`, workflow `publish.yml`, with no environment. No registry token or package release is created by this migration.
+The shared packager verifies the actual archive, including its MIT license, core/React exports and supporting runtime files. Before preparation, commit matching package/lockfile versions. Optional `docs/releases/VERSION.md` files supply custom notes; otherwise GitHub generates the draft notes. Configure npm ownership and trusted publishing for repository `abhi1693/medusa-nextjs-jsonld`, workflow `publish.yml`, with no environment. No registry token or package release is created by this migration.
+
+## License
+
+[MIT](LICENSE) © 2026 abhi1693.
