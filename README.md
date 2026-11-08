@@ -26,10 +26,10 @@ Install this library in the **storefront** and add its component to the correspo
 
 ## Install
 
-The scoped package release version is `0.0.2`. Once that version is available on npm, install it in your storefront:
+The scoped package release version is `0.0.3`. Once that version is available on npm, install it in your storefront:
 
 ```sh
-npm install @abhi1693/medusa-nextjs-jsonld@0.0.2
+npm install @abhi1693/medusa-nextjs-jsonld@0.0.3
 ```
 
 To install a reviewed source checkout, build and pack it first:
@@ -39,7 +39,7 @@ npm ci
 npm run check
 npm pack
 # In your storefront, install the resulting local tarball:
-npm install /path/to/abhi1693-medusa-nextjs-jsonld-0.0.2.tgz
+npm install /path/to/abhi1693-medusa-nextjs-jsonld-0.0.3.tgz
 ```
 
 Requires Node 20+, React 18/19 for the `/react` export. Core imports do not load React or Next. The package is currently ESM-only. Licensed under [MIT](LICENSE).
